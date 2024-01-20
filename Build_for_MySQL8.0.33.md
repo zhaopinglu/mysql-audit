@@ -45,7 +45,8 @@ Ref: https://github.com/trellix-enterprise/mysql-audit/issues/266
 
 
 ## Replace: my_charset_utf8_general_ci -> my_charset_utf8mb3_general_ci 
-# Modify src/audit_handler.cc
+src/audit_handler.cc:
+```
 	836-#else	
 	837-  /*
 	838-    TODO: Migrate the data itself to UTF8MB4,
@@ -56,12 +57,14 @@ Ref: https://github.com/trellix-enterprise/mysql-audit/issues/266
 	843-  copy_length = well_formed_copy_nchars(
 	844:      //&my_charset_utf8_bin
 	845-      &my_charset_utf8mb3_bin
- 
+```
+```
 	1090-#if defined(MARIADB_BASE_VERSION) && MYSQL_VERSION_ID >= 100504	
 	1091-					&my_charset_utf8mb3_general_ci,
 	1092-#else
 	1093:					//&my_charset_utf8_general_ci,
 	1094-					&my_charset_utf8mb3_general_ci,
+```
 
 Ref: https://github.com/trellix-enterprise/mysql-audit/issues/261
 
