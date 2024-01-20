@@ -36,15 +36,14 @@ cmake3 .. -DWITH_BOOST=../boost
 
 
 ### Modify mysql-audit source code
-## Replace: TABLE_LIST -> Table_ref
 cd mysql-audit
 
+## Replace: "TABLE_LIST" -> "Table_ref"
 perl -pi -e 's/TABLE_LIST/Table_ref/g' `grep -rlw TABLE_LIST include/ src/ offset-extract/`
 
 Ref: https://github.com/trellix-enterprise/mysql-audit/issues/266
 
-
-## Replace: my_charset_utf8_general_ci -> my_charset_utf8mb3_general_ci 
+## Replace: "my_charset_utf8_general_ci" To "my_charset_utf8mb3_general_ci" And "my_charset_utf8_bin" To "my_charset_utf8mb3_bin"
 src/audit_handler.cc:
 ```
 	836-#else	
