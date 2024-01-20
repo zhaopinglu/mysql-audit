@@ -1,4 +1,4 @@
-# A Quick Note for bulding mysql-audit for MySQL 8.0.33
+# A Quick Note of bulding mysql-audit for MySQL 8.0.33
 
 
 ### Compile Ref
