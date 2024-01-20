@@ -20,6 +20,7 @@ yum -y install  autoconf automake readline-devel gcc gcc-c++ boost make cmake cm
 
 ### Extract source
 git clone https://github.com/trellix-enterprise/mysql-audit.git
+
 cd mysql-audit
 ### extrace mysql 8.0.33 source code under mysql-audit code folder
 tar zxvf ../mysql-boost-8.0.33.tar.gz
