@@ -1,37 +1,37 @@
 # A Quick Note on bulding mysql-audit for MySQL 8.0.33
 
 
-### Compile Ref
+# Compile Ref
 https://github.com/trellix-enterprise/mysql-audit/blob/master/compiling.txt
 https://github.com/trellix-enterprise/mysql-audit/issues/246
 
 
-### Download mysql audit source code
+# Download mysql audit source code
 https://github.com/trellix-enterprise/mysql-audit
 
 
-### Download mysql source code
+# Download mysql source code
 https://downloads.mysql.com/archives/get/p/23/file/mysql-boost-8.0.33.tar.gz
 
 
-### Prepare
+# Prepare
 ```
 yum -y install  autoconf automake readline-devel gcc gcc-c++ boost make cmake cmake3 bison bison-devel ncurses-devel libaio-devel perl git libtirpc libtirpc-devel bzip2-devel python-devel curl-devel devtoolset-11-gcc devtoolset-11-gcc-c++ devtoolset-11-binutils
 ```
 
 
-### Clone mysql audit source
+# Clone mysql audit source
 ```
 git clone https://github.com/trellix-enterprise/mysql-audit.git
 ```
 
-### Extract mysql 8.0.33 source code into mysql-audit code folder
+# Extract mysql 8.0.33 source code into mysql-audit code folder
 ```
 cd mysql-audit
 tar zxvf ../mysql-boost-8.0.33.tar.gz
 ```
 
-### Build MySQL 8.0.33
+# Build MySQL 8.0.33
 ```
 cd mysql-audit/mysql-8.0.33
 mkdir brelease
@@ -39,7 +39,7 @@ cd brelease
 cmake3 .. -DWITH_BOOST=../boost 
 ```
 
-### Modify mysql-audit source code
+# Modify mysql-audit source code
 
 ## Replace: "TABLE_LIST" -> "Table_ref"
 ```
