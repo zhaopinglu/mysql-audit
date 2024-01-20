@@ -15,25 +15,29 @@ https://downloads.mysql.com/archives/get/p/23/file/mysql-boost-8.0.33.tar.gz
 
 
 ### Prepare
+```
 yum -y install  autoconf automake readline-devel gcc gcc-c++ boost make cmake cmake3 bison bison-devel ncurses-devel libaio-devel perl git libtirpc libtirpc-devel bzip2-devel python-devel curl-devel devtoolset-11-gcc devtoolset-11-gcc-c++ devtoolset-11-binutils
+```
 
 
 ### Extract source
+```
 git clone https://github.com/trellix-enterprise/mysql-audit.git
-
 cd mysql-audit
+```
+
 ### extrace mysql 8.0.33 source code under mysql-audit code folder
+```
 tar zxvf ../mysql-boost-8.0.33.tar.gz
+```
 
 ### Build MySQL 8.0.33
+```
 cd mysql-audit/mysql-8.0.33
-
 mkdir brelease
-
 cd brelease
-
 cmake3 .. -DWITH_BOOST=../boost 
-
+```
 
 ### Modify mysql-audit source code
 cd mysql-audit
