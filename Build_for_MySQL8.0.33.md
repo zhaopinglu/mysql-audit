@@ -1,37 +1,37 @@
-# A Brief Step-by-Step note to build mysql-audit for MySQL 8.0.33
+#### A Brief Step-by-Step note to build mysql-audit for MySQL 8.0.33
 
 
-# Compile Ref
+### Compile Ref
 https://github.com/trellix-enterprise/mysql-audit/blob/master/compiling.txt
 https://github.com/trellix-enterprise/mysql-audit/issues/246
 
 
-# Download mysql audit source code
+### Download mysql audit source code
 https://github.com/trellix-enterprise/mysql-audit
 
 
-# Download mysql source code
+### Download mysql source code
 https://downloads.mysql.com/archives/get/p/23/file/mysql-boost-8.0.33.tar.gz
 
 
-# Prepare
+### Prepare
 yum -y install  autoconf automake readline-devel gcc gcc-c++ boost make cmake cmake3 bison bison-devel ncurses-devel libaio-devel perl git libtirpc libtirpc-devel bzip2-devel python-devel curl-devel devtoolset-11-gcc devtoolset-11-gcc-c++ devtoolset-11-binutils
 
 
-# Extract source
+### Extract source
 git clone https://github.com/trellix-enterprise/mysql-audit.git
 cd mysql-audit
-# extrace mysql 8.0.33 source code under mysql-audit code folder
+### extrace mysql 8.0.33 source code under mysql-audit code folder
 tar zxvf ../mysql-boost-8.0.33.tar.gz
 
-# Build MySQL 8.0.33
+### Build MySQL 8.0.33
 cd mysql-audit/mysql-8.0.33
 mkdir brelease
 cd brelease
 cmake3 .. -DWITH_BOOST=../boost 
 
 
-# Modify mysql-audit source code
+### Modify mysql-audit source code
 ## Replace: TABLE_LIST -> Table_ref
 cd mysql-audit
 perl -pi -e 's/TABLE_LIST/Table_ref/g' `grep -rlw TABLE_LIST include/ src/ offset-extract/`
@@ -40,7 +40,7 @@ Ref: https://github.com/trellix-enterprise/mysql-audit/issues/266
 
 
 ## Replace: my_charset_utf8_general_ci -> my_charset_utf8mb3_general_ci 
-### Modify src/audit_handler.cc
+# Modify src/audit_handler.cc
 	836-#else	
 	837-  /*
 	838-    TODO: Migrate the data itself to UTF8MB4,
@@ -61,7 +61,7 @@ Ref: https://github.com/trellix-enterprise/mysql-audit/issues/266
 Ref: https://github.com/trellix-enterprise/mysql-audit/issues/261
 
 
-# Build mysql-audit
+### Build mysql-audit
 cd mysql-audit
 cp -rap ./mysql-8.0.33/brelease/include/* ./include/.
 
@@ -71,12 +71,12 @@ chmod +x bootstrap.sh
 CXX='gcc -static-libgcc' CC='gcc -static-libgcc' ./configure --with-mysql=mysql-8.0.33/brelease --with-mysql-libservices=mysql-8.0.33/brelease/libservices/libmysqlservices.a
 make -j16
 
-# Install
+### Install
 cp src/.lib/libaudit_plugin.* /usr/lib64/mysql/plugin/.
 chmod +x /usr/lib64/mysql/plugin/libaudit*
 
 
-# Check
+### Check
 ls -l /usr/lib/mysql/plugin/
 -rwxr-xr-x 1 root root     991 1月  20 17:10:33 libaudit_plugin.lai
 -rwxr-xr-x 1 root root     990 1月  20 17:10:33 libaudit_plugin.la
@@ -86,7 +86,7 @@ ls -l /usr/lib/mysql/plugin/
 -rwxr-xr-x 1 root root 2222384 1月  20 17:10:36 libaudit_plugin.so.0.0.0
 
 
-# Collect mysqld offsets
+### Collect mysqld offsets
 ## Install mysql debug symbol file
 yum install https://downloads.mysql.com/archives/get/p/23/file/mysql-community-debuginfo-8.0.33-1.el7.x86_64.rpm
 
@@ -97,7 +97,7 @@ cd offset-extract
 
 Note: record the numbers. 
 
-# Setup
+### Setup
 ## /etc/my.cnf:
 plugin-load=AUDIT=libaudit_plugin.so
 audit_json_file=on
@@ -106,12 +106,12 @@ audit_record_cmds='insert,delete,update,create,drop,alter,grant,truncate'
 #For Oracle MySQL 8.0.33 EL7X64
 audit_offsets=9504, 9544, 4960, 6444, 1288, 0, 0, 32, 64, 160, 1376, 9644, 6064, 4248, 4256, 4260, 7728, 1576, 32, 8688, 8728, 8712, 12568, 140, 664, 320
 
-## Restart mysqld service
+### Restart mysqld service
 systemctl restart mysqld
 
 
 
-# Test
+### Test
 mysql -uroot -p
 use test;
 create table test_log(id int, name varchar(30));
@@ -125,7 +125,7 @@ insert into test_log values(1,'asdf');
 
 
 
-# Issues
+### Issues
 ## Issue WARNING: 'aclocal-1.15' is missing on your system.
 
 Symptom:
