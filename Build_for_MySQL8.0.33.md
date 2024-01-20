@@ -1,4 +1,4 @@
-#### A Brief Step-by-Step note to build mysql-audit for MySQL 8.0.33
+#### A Quick Note for bulding mysql-audit for MySQL 8.0.33
 
 
 ### Compile Ref
@@ -224,9 +224,7 @@ Ref: https://linuxhostsupport.com/blog/how-to-install-gcc-on-centos-7/
 ## Issue crc32_z was not declared in this scope
 
 # Solution:
-Build & Install zlib 1.2.13:
-
-Download https://github.com/madler/zlib/releases, then:
+Download the zlib 1.2.13 from https://github.com/madler/zlib/releases, then build & install it:
 ```
 tar …
 cd …
