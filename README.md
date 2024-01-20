@@ -1,7 +1,7 @@
 
-# A Quick Note for bulding mysql-audit for MySQL 8.0.33
 
- [Check out](Note_for_MySQL8.0.33.md)
+
+ [A Quick Note on bulding mysql-audit for MySQL 8.0.33](Note_for_MySQL8.0.33.md)
 
 
 
