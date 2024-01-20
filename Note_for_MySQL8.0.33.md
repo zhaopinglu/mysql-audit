@@ -74,7 +74,7 @@ src/audit_handler.cc:
 Ref: https://github.com/trellix-enterprise/mysql-audit/issues/261
 
 
-### Build mysql-audit
+# Build mysql-audit
 ```
 cd mysql-audit
 cp -rap ./mysql-8.0.33/brelease/include/* ./include/.
@@ -84,13 +84,13 @@ CXX='gcc -static-libgcc' CC='gcc -static-libgcc' ./configure --with-mysql=mysql-
 make -j16
 ```
 
-### Install
+# Install
 ```
 cp src/.lib/libaudit_plugin.* /usr/lib64/mysql/plugin/.
 chmod +x /usr/lib64/mysql/plugin/libaudit*
 ```
 
-### Check
+# Check
 ls -l /usr/lib64/mysql/plugin/
 ```
 -rwxr-xr-x 1 root root     991 1月  20 17:10:33 libaudit_plugin.lai
@@ -101,12 +101,12 @@ ls -l /usr/lib64/mysql/plugin/
 -rwxr-xr-x 1 root root 2222384 1月  20 17:10:36 libaudit_plugin.so.0.0.0
 ```
 
-### Install mysql debug symbol file
+# Install mysql debug symbol file
 ```
 yum install https://downloads.mysql.com/archives/get/p/23/file/mysql-community-debuginfo-8.0.33-1.el7.x86_64.rpm
 ```
 
-### Collect mysqld offsets
+# Collect mysqld offsets
 ```
 cd offset-extract
 ./offset-extract.sh `which mysqld` /usr/lib/debug/usr/sbin/mysqld.debug
@@ -117,7 +117,7 @@ cd offset-extract
 
 Note: record the numbers. 
 
-### Config mysqld
+# Config mysqld
 /etc/my.cnf:
 ```
 plugin-load=AUDIT=libaudit_plugin.so
@@ -128,13 +128,13 @@ audit_record_cmds='insert,delete,update,create,drop,alter,grant,truncate'
 audit_offsets=9504, 9544, 4960, 6444, 1288, 0, 0, 32, 64, 160, 1376, 9644, 6064, 4248, 4256, 4260, 7728, 1576, 32, 8688, 8728, 8712, 12568, 140, 664, 320
 ```
 
-### Restart mysqld service
+# Restart mysqld service
 ```
 systemctl restart mysqld
 ```
 
 
-### Test
+# Test
 ```
 mysql -uroot -p
 use test;
