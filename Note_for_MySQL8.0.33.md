@@ -149,10 +149,10 @@ insert into test_log values(1,'asdf');
 
 
 
-### Issues
+# Issues
 ## Issue WARNING: 'aclocal-1.15' is missing on your system.
 
-# Symptom:
+### Symptom:
 Hit error when making mysql-audit:
 ```
 ..
