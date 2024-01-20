@@ -1,3 +1,10 @@
+# A Quick Note for bulding mysql-audit for MySQL 8.0.33<sup>*</sup>
+
+Check out [Note_for_MySQL8.0.33.md]
+
+
+
+# ------------------------------------------------------------
 # AUDIT Plugin for MySQL<sup>*</sup>
 
 
