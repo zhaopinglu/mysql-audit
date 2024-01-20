@@ -150,7 +150,8 @@ insert into test_log values(1,'asdf');
 
 
 # Issues
-## Issue WARNING: 'aclocal-1.15' is missing on your system.
+
+## Issue 1 WARNING: 'aclocal-1.15' is missing on your system.
 
 ### Symptom:
 Hit error when making mysql-audit:
@@ -159,14 +160,14 @@ Hit error when making mysql-audit:
 WARNING: 'aclocal-1.15' is missing on your system.
 ```
 
-# Reason:
+### Reason:
 ```
 The install automake version is too old:
 automake --version
 1.13
 ```
 
-# Solution:
+### Solution:
 Install automake 1.15 & build it
 ```
 wget https://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
@@ -186,21 +187,21 @@ aclocal (GNU automake) 1.15
 ```
 
 
-## Issue fatal error: string_view: No such file or directory
+## Issue 2 fatal error: string_view: No such file or directory
 
-# Symptom:
+### Symptom:
 Hit error when making mysql-audit:
 ```
 /root/tools/mysql-audit/mysql-8.0.33/include/lex_string.h:31:23: fatal error: string_view: No such file or directory
 ```
 
-# Reason:
+### Reason:
 You'll need to update your compiler. std::string_view is not available in GCC until version 7.
 
 Ref: https://stackoverflow.com/questions/64141078/compile-c-file-in-linux-terminal-string-view-no-such-file-or-directory
 
 
-# Solution:
+### Solution:
 Install newer version of gcc:
 ```
 wget https://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-13.2.0/gcc-13.2.0.tar.xz
@@ -213,7 +214,7 @@ make install
 export PATH=/usr/local/bin:$PATH
 ```
 
-# Verify:
+### Verify:
 ```
 gcc --version
 ```
@@ -221,9 +222,9 @@ gcc --version
 Ref: https://linuxhostsupport.com/blog/how-to-install-gcc-on-centos-7/
 
 
-## Issue crc32_z was not declared in this scope
+## Issue 3 crc32_z was not declared in this scope
 
-# Solution:
+### Solution:
 Download the zlib 1.2.13 from https://github.com/madler/zlib/releases, then build & install it:
 ```
 tar …
@@ -233,15 +234,15 @@ make
 make install
 ```
 
-## Issue error when loading audit plugin: Plugin 'AUDIT' registration as a AUDIT failed
+## Issue 4 error when loading audit plugin: Plugin 'AUDIT' registration as a AUDIT failed
 
-# Symptom:
+### Symptom:
 ```
 2024-01-20T09:20:42.552079Z 8 [ERROR] [MY-010202] [Server] Plugin 'AUDIT' init function returned error.
 2024-01-20T09:20:42.552126Z 8 [ERROR] [MY-010734] [Server] Plugin 'AUDIT' registration as a AUDIT failed.
 ```
 
-# Solution:
+### Solution:
 Install the corresponding version of mysql debuginfo rpm.
 
 Collect mysqld offsets then set audit_offsets:
